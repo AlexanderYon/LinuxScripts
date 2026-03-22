@@ -1,14 +1,19 @@
 #!/bin/bash
 
+# Daemon to check and notify when battery reaches low or critical level
+
 low_notified=false 			# Flag to notify low battery
 critical_notified=false		# Flag to notify critical battery
 
+# Define levels, you can change them as you want
 LOW=15
 CRITICAL=5
 HIBERNATE=3
 
 while true; do
 
+	# Battery device names (like BAT1) may vary between systems.
+	# Verify the correct device path before running this script.
 	bat_status=$(cat /sys/class/power_supply/BAT1/status) # Charging / Discharging / Full
 	bat_level=$(cat /sys/class/power_supply/BAT1/capacity) # Integer
   
